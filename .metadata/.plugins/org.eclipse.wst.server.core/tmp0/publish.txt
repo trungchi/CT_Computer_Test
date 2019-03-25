@@ -1,3 +1,0 @@
-#Tomcat publish data
-#Mon Mar 25 14:17:34 ICT 2019
-org.eclipse.jst.j2ee.server\:/binary\:/home/dev/TrungChi/MyData/Open\ University/SEM_05/Kiem_Thu/CTComputer/CT_Computer_Test/CTComputer/src/main/webapp/WEB-INF/lib/spring-web-4.0.1.RELEASE.jar=WEB-INF/lib/spring-web-4.0.1.RELEASE.jar
