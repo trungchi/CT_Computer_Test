@@ -93,5 +93,6 @@
 	<classpathentry kind="lib" path="E:/WorkspaceJava/CTComputer/src/main/webapp/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
 	<classpathentry kind="lib" path="E:/WorkspaceJava/CTComputer/src/main/webapp/WEB-INF/lib/velocity-1.6.2.jar"/>
 	<classpathentry kind="lib" path="E:/WorkspaceJava/CTComputer/src/main/webapp/WEB-INF/lib/velocity-tools-2.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

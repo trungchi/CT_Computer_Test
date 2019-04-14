@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 public class SendMail {
 
 	public static boolean sendMail(String to, String subject, String text) {
-		final String email = "thanhtuyen98hp@gmail.com";
+		final String email = "trungchi92@gmail.com";
 		final String password = "vip.computer";
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -45,6 +45,6 @@ public class SendMail {
 	}
 
 	public static void main(String[] arg) {
-		System.out.println(sendMail("hieudth01@gmail.com", "HTT Mobile", "Hello, Hieu Boy"));
+		System.out.println(sendMail("trungchi92@gmail.com", "CT COMPUTER", "Hello, Trung Chi"));
 	}
 }

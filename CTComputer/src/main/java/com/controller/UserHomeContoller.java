@@ -55,7 +55,7 @@ public class UserHomeContoller {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			helper.setFrom(email);
-			helper.setTo("thanhtuyen98hp@gmail.com");
+			helper.setTo("trungchi92@gmail.com");
 			helper.setReplyTo("CT Computer Shop <computerfc@gmail.com>");
 			helper.setSubject("[Feedback] Thư đóng góp ý kiến của khách hàng: " + name);
 			helper.setText(
