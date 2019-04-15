@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.File;
+import java.io.Serializable;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
