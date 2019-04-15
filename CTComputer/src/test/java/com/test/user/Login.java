@@ -12,8 +12,10 @@ public class Login {
 	
 	public boolean checkValidCustomer(String username, String password){
 		try {
+            
 			Customer customer = new Customer();
 			customer.setId(username);
+			System.out.println(sessionFactory);
 			Session session = sessionFactory.getCurrentSession();
 			session.refresh(customer);
 			if(customer.getId().equals(username))
