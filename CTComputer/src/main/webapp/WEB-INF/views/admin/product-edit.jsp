@@ -6,14 +6,14 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<script src="/HieuBoyShop/nicEditor/nicEdit.js" type="text/javascript"></script>
+<script src="/CTComputer/nicEditor/nicEdit.js" type="text/javascript"></script>
 <script type="text/javascript">
 	bkLib.onDomLoaded(function() {
 		//new nicEditor().panelInstance('description');
 		new nicEditor({
 			fullPanel : true,
-			iconsPath : '/HieuBoyShop/nicEditor/nicEditorIcons.gif',
-			uploadURI : '/HieuBoyShop/nicEditor/upload',
+			iconsPath : '/CTComputer/nicEditor/nicEditorIcons.gif',
+			uploadURI : '/CTComputer/nicEditor/upload',
 			buttonList : [ 'fontSize', 'bold', 'italic', 'underline',
 					'strikeThrough', 'subscript', 'superscript', 'html',
 					'image' ],

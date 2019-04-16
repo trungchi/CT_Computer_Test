@@ -17,7 +17,7 @@
 	color: red;
 	font-style: italic;
 	padding-left: 33px;
-	background: url("images/hieuboy2.gif") no-repeat left center;
+	background: url("images/icon2.gif") no-repeat left center;
 }
 </style>
 
