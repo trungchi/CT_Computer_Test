@@ -1,34 +1,47 @@
 package com.test.user;
 
+import java.util.List;
+
+import javax.servlet.http.Cookie;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.model.Customer;
-import com.other.HibernateUtil;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-public class Login{
+import com.model.Customer;
+import com.model.Product;
+
+public class Login {
 	SessionFactory sessionFactory;
+	public Login(SessionFactory sessionFactory){
+		this.sessionFactory = sessionFactory;
+	}
 	public boolean checkValidCustomer(String username, String password){
-		Session session = null;
+		Customer customer = new Customer();
+		customer.setId(username);
+		System.out.println(sessionFactory);
+		Session session = sessionFactory.getCurrentSession();
 		try {
-//			sessionFactory = HibernateUtil.getSessionFactory();
-			Customer customer = new Customer();
-			customer.setId(username);
-			System.out.println(sessionFactory);
-//			Session session = sessionFactory.getCurrentSession();
-			session = HibernateUtil.getSessionFactory().openSession(); //getCurrentSession();
-			Customer customerData = (Customer) session.get(Customer.class, username);
-			if(customer.getId().equals(username))
+			String hql = "FROM Customer c WHERE c.id = '"+username+"' AND c.password = '"+password+"' AND c.activated = true";
+			Query query = session.createQuery(hql);
+			List<Customer> list = query.list();
+			System.out.println(list.size());
+			if(list.size() == 1){
 				return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			session.close();
+			}else{
+				return false;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
 		}
-		return false;
 	}
 	public static void main(String[] args) {
-		Login login = new Login();
+		Login login = new Login(null);
 		login.checkValidCustomer("trungchi", "123456");
 	}
 }
