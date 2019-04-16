@@ -3,6 +3,9 @@ package com.test.user;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import com.admin.dao.AccountDAO;
+import com.model.Admin;
 public class TestLogin {
 	Login login = new Login();
 	@Test

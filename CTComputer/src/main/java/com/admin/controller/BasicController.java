@@ -153,5 +153,4 @@ public class BasicController {
 	public ShoppingCart getShoppingCart() {
 		return cart;
 	}
-
 }

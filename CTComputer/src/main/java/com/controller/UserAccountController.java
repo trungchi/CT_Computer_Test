@@ -163,7 +163,7 @@ public class UserAccountController extends BasicController {
 
 		Customer customer = new Customer();
 		customer.setId(user.getId());
-
+		System.out.println(sessionFactory);
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.refresh(customer);
