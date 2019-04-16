@@ -117,4 +117,10 @@ public class AccountService {
 	public Admin login(String username, String password) {
 		return accountDAO.login(username, password);
 	}
+	
+	public static void main(String[] args) {
+		AccountService accountService = new AccountService();
+		int rowAdmin = accountService.getRowAdmin();
+		System.out.println(rowAdmin);
+	}
 }
