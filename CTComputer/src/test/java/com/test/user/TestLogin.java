@@ -2,25 +2,129 @@ package com.test.user;
 
 import static org.junit.Assert.*;
 
-import org.hibernate.SessionFactory;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-//@Controller
-//@Transactional
-//@RequestMapping(value = "test")
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import com.test.selenium.RunEnvironment;
+import com.test.selenium.SeleniumManager;
+
 public class TestLogin {
-	@Autowired
-	SessionFactory sessionFactory;
+	private WebDriver driver = null;
+	@Before
+    public void startBrowser() {
+        SeleniumManager.initWebDriver();
+        driver = RunEnvironment.getWebDriver();
+        driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+		driver.get("http://localhost:8080/CTComputer/");
+    }
 	
-	@RequestMapping(value = "home")
-	@Test
-	public void test() {
-		Login login = new Login(sessionFactory);
-//		assertEquals(false, login.checkValidCustomer("chi", "123456"));
-		assertEquals(false, true);
-	}
+//    @Test
+//    public void demo() {
+//    	try {
+//    		WebDriver driver = RunEnvironment.getWebDriver();
+//    		driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+//    		driver.get("https://www.blazemeter.com/selenium");
+//    		String homeUrl = driver.findElement(By.cssSelector("div#logo> a#logo_image ")).getAttribute("href");
+//    		assertEquals(homeUrl, "https://www.blazemeter.com/");
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+//    }
+    
+    @Test
+    public void loginSuccess() {
+    	try {
+    		
+    		assertEquals(true, login("trungchi", "123456"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
+    @Test
+    public void loginWrongPassword() {
+    	try {
+    		assertEquals(true, login("trungchi", "1234567"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
+    @Test
+    public void loginUserName() {
+    	try {
+    		assertEquals(true, login("trungchi123", "123456"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
+    @Test
+    public void loginPasswordLessThan6Characters() {
+    	try {
+    		assertEquals(true, login("trungchi123", "123456"));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
+    @Test
+    public void loginEmptyValue() {
+    	try {
+    		assertEquals(true, login("", ""));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+    
+    public boolean login(String userName, String password){
+    	try {
+    		if(userName.isEmpty() || password.isEmpty() || password.length() < 6){
+    			return false;
+    		}
+    		WebElement menuLogin = driver.findElement(By.xpath("//*[@id='topMenu']/li[7]/a/span"));
+    		menuLogin.click();
+    		
+    		WebElement elementId = driver.findElement(By.id("id"));
+    		elementId.sendKeys(userName);
+    		
+    		WebElement elementPassword = driver.findElement(By.id("password"));
+    		elementPassword.sendKeys(password);
+    		
+    		WebElement btnLogin = driver.findElement(By.xpath("//*[@id='register']/div[4]/div/input"));
+    		btnLogin.click();
+    		
+  			List<WebElement> elementError = driver.findElements(By.xpath("//*[@id='register']/label"));
+  			List<WebElement> elementErrorUser = driver.findElements(By.xpath("//*[@id='register']/div[1]/div/label"));
+  			List<WebElement> elementErrorPass = driver.findElements(By.xpath("//*[@id='register']/div[2]/div/label"));
+    		if(elementError.size() > 0 || elementErrorUser.size() > 0 || elementErrorPass.size() > 0){
+   				return false;
+    		}else{
+    			return true;
+    		}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+    }
+
+    @After
+    public void tearDown() {
+    	SeleniumManager.shutDownDriver();
+    }
 }
