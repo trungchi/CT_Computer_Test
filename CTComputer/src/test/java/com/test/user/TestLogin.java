@@ -21,6 +21,7 @@ public class TestLogin {
 	@Before
     public void startBrowser() {
         SeleniumCommon.startBrowser(driver);
+        driver = RunEnvironment.getWebDriver();
     }
 	
 //    @Test
@@ -51,7 +52,7 @@ public class TestLogin {
     @Test
     public void loginWrongPassword() {
     	try {
-    		assertEquals(true, login("trungchi", "1234567"));
+    		assertEquals(false, login("trungchi", "1234567"));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -59,9 +60,9 @@ public class TestLogin {
     }
     
     @Test
-    public void loginUserName() {
+    public void loginWrongUserName() {
     	try {
-    		assertEquals(true, login("trungchi123", "123456"));
+    		assertEquals(false, login("trungchi123", "123456"));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -71,7 +72,7 @@ public class TestLogin {
     @Test
     public void loginPasswordLessThan6Characters() {
     	try {
-    		assertEquals(true, login("trungchi123", "123456"));
+    		assertEquals(false, login("trungchi123", "123456"));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -81,7 +82,7 @@ public class TestLogin {
     @Test
     public void loginEmptyValue() {
     	try {
-    		assertEquals(true, login("", ""));
+    		assertEquals(false, login("", ""));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
