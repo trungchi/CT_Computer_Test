@@ -33,6 +33,7 @@ public class TestBuyProduct {
 	public Order initOrder(){
 		Order order = new Order();
 		order.setRequireDate(DateFormat.stringToDate("20/04/2019"));
+		order.setReceiver("Nguyen Trung Chi");
 		order.setNumberPhone("123456789");
 		order.setAddress("HCM");
 		order.setDescription("Nguyen Trung Chi mua hàng");
