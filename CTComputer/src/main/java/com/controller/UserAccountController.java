@@ -239,10 +239,12 @@ public class UserAccountController extends BasicController {
 						+ "'>Kích Hoạt </a> để kích hoạt tài khoản của bạn !";
 				helper.setText(text, true);
 				mailSender.send(massage);
+				model.addAttribute("message", "Đăng ký thành công. Vui lòng kiểm tra email để kích hoạt tài khoản");
 			} catch (Exception ex) {
 				model.addAttribute("message", "Lỗi gửi mail");
 			}
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			model.addAttribute("message", "Đăng ký lỗi");
 		}
 		return "user/register";

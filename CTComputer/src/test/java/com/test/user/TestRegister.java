@@ -2,6 +2,8 @@ package com.test.user;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,23 +21,25 @@ import com.test.util.StringUtil;
 
 public class TestRegister {
 	private WebDriver driver = null;
-	
+	private Customer customer = new Customer();
 	@Before
     public void startBrowser() {
         SeleniumCommon.startBrowser(driver);
         driver = RunEnvironment.getWebDriver();
+		customer.setFullName("Trung Chi");
+		customer.setId("nguyentrungchi");
+		customer.setPassword("123456");
+		customer.setEmail("trungchi92@gmail.com");
+		customer.setBirthday(DateFormat.stringToDate("22/11/2011"));
+		customer.setNumberPhone("1234567890");
+		customer.setGender(2);
+		customer.setAddress("TP. HCM");
+		customer.setPhoto("C:/photo/img.jpg");
     }
 	
 	@Test
     public void register() {
     	try {
-    		Customer customer = new Customer();
-    		customer.setFullName("Trung Chi");
-    		customer.setBirthday(DateFormat.stringToDate("22/11/2011"));
-    		customer.setNumberPhone("1234567890");
-    		customer.setAddress("TP. HCM");
-    		customer.setGender(2);
-    		customer.setPhoto("C:/photo/img.jpg");
     		assertEquals(true, register(customer));
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -89,12 +93,25 @@ public class TestRegister {
 			btnRegister.click();
 			
 			//GET RESULT
+			List<WebElement> listInfo = driver.findElements(By.xpath("/html/body/div[2]/div/div/div[2]/div/form/h4"));
+			for(WebElement e : listInfo){
+				String value = e.getText();
+				if(value.contains("Đăng ký thành công"))
+					return true;
+				else if(value.contains("Đăng ký lỗi") || value.contains("Lỗi gửi mail") || value.contains("Tên đăng nhập đã tồn tại"))
+					return false;
+			}
 			
+			WebElement form = driver.findElement(By.id("register"));
+			List<WebElement> listError = form.findElements(By.cssSelector(".controls > label"));
+			if(listError.size() > 0)
+				return false;
+			else
+				return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-		return false;
 	}
 	
 	@After
