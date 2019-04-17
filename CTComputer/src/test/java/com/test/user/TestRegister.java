@@ -86,8 +86,10 @@ public class TestRegister {
 			
 			//Click Register
 			WebElement btnRegister = driver.findElement(By.xpath("//*[@id='register']/div[10]/div/input"));
-			birthday.sendKeys(DateFormat.dateToString(customer.getBirthday()));
-			birthday.sendKeys(Keys.ESCAPE);
+			btnRegister.click();
+			
+			//GET RESULT
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
