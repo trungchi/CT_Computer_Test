@@ -13,16 +13,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.test.selenium.RunEnvironment;
+import com.test.selenium.SeleniumCommon;
 import com.test.selenium.SeleniumManager;
 
 public class TestLogin {
 	private WebDriver driver = null;
 	@Before
     public void startBrowser() {
-        SeleniumManager.initWebDriver();
-        driver = RunEnvironment.getWebDriver();
-        driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
-		driver.get("http://localhost:8080/CTComputer/");
+        SeleniumCommon.startBrowser(driver);
     }
 	
 //    @Test
@@ -124,7 +122,7 @@ public class TestLogin {
     }
 
     @After
-    public void tearDown() {
-    	SeleniumManager.shutDownDriver();
+    public void stopBrowser() {
+    	SeleniumManager.stopDriver();
     }
 }

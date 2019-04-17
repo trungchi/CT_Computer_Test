@@ -19,7 +19,7 @@
 	    <artifactId>selenium-java</artifactId>
 	    <version>3.9.1</version>
 	</dependency>
-  </dependencies>
+  </dependencies> 
   <build>
     <finalName>CTComputer</finalName>
   </build>
