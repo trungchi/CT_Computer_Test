@@ -3,6 +3,7 @@ package com.test.user;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,6 +45,34 @@ public class TestBuyProduct {
 		assertEquals(true, register(order));
 	}
 	
+	@Test
+	public void buyProductEmptyRequireDate(){
+		order = initOrder();
+		order.setRequireDate(null);
+		assertEquals(false, register(order));
+	}
+	
+	@Test
+	public void buyProductEmptyReceiver(){
+		order = initOrder();
+		order.setReceiver("");
+		assertEquals(false, register(order));
+	}
+	
+	@Test
+	public void buyProductEmptyPhone(){
+		order = initOrder();
+		order.setNumberPhone("");
+		assertEquals(false, register(order));
+	}
+	
+	@Test
+	public void buyProductEmptyAddress(){
+		order = initOrder();
+		order.setAddress("");
+		assertEquals(false, register(order));
+	}
+	
 	public boolean register(Order order){
 		try {
 			
@@ -80,6 +109,12 @@ public class TestBuyProduct {
 			elementRequireDate.sendKeys(StringUtil.checkNull(DateFormat.dateToString(order.getRequireDate())));
 			elementRequireDate.sendKeys(Keys.ESCAPE);
 			
+			//Fill receiver
+			WebElement elementReceiver = driver.findElement(By.id("receiver"));
+			elementReceiver.clear();
+			elementReceiver.sendKeys(StringUtil.checkNull(order.getReceiver()));
+			
+			
 			//Fill phone
 			WebElement elementNumberPhone = driver.findElement(By.id("numberPhone"));
 			elementNumberPhone.sendKeys(StringUtil.checkNull(order.getNumberPhone()));
@@ -92,7 +127,16 @@ public class TestBuyProduct {
 			WebElement elementDescription = driver.findElement(By.id("description"));
 			elementDescription.sendKeys(StringUtil.checkNull(order.getDescription()));
 			
-			return true;
+			//Click đặt hàng
+			WebElement btnOrder = driver.findElement(By.xpath("//*[@id='order']/div[9]/div/input"));
+			btnOrder.click();
+			
+			WebElement formOrder = driver.findElement(By.id("order"));
+			List<WebElement> listError = formOrder.findElements(By.cssSelector(".controls > label"));
+			if(listError.size() > 0)
+				return false;
+			else
+				return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -101,6 +145,6 @@ public class TestBuyProduct {
 	
 	@After
     public void stopBrowser() {
-//    	SeleniumManager.stopDriver();
+    	SeleniumManager.stopDriver();
     }
 }
