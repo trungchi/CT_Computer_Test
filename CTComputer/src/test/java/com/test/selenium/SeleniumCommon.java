@@ -8,6 +8,7 @@ public class SeleniumCommon {
 	public static void startBrowser(WebDriver driver) {
         SeleniumManager.initWebDriver();
         driver = RunEnvironment.getWebDriver();
+        driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
 		driver.get("http://localhost:8080/CTComputer/");
     }

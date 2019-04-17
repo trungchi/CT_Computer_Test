@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.model.Customer;
 import com.test.selenium.RunEnvironment;
 import com.test.selenium.SeleniumCommon;
+import com.test.selenium.SeleniumManager;
 import com.test.util.DateFormat;
 import com.test.util.StringUtil;
 
@@ -26,6 +27,10 @@ public class TestRegister {
     public void startBrowser() {
         SeleniumCommon.startBrowser(driver);
         driver = RunEnvironment.getWebDriver();
+    }
+	
+	private Customer initCustomer(){
+		Customer customer = new Customer();
 		customer.setFullName("Trung Chi");
 		customer.setId("nguyentrungchi");
 		customer.setPassword("123456");
@@ -35,12 +40,73 @@ public class TestRegister {
 		customer.setGender(2);
 		customer.setAddress("TP. HCM");
 		customer.setPhoto("C:/photo/img.jpg");
+		return customer;
+	}
+	
+//	@Test
+    public void registerSuccess() {
+    	try {
+    		customer = initCustomer();
+    		assertEquals(true, register(customer));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+	
+//	@Test
+    public void registerDuplicateUser() {
+    	try {
+    		customer = initCustomer();
+    		assertEquals(false, register(customer));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+	
+//	@Test
+    public void registerEmptyFullName() {
+    	try {
+    		customer = initCustomer();
+    		customer.setFullName("");
+    		assertEquals(false, register(customer));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+	
+//	@Test
+    public void registerEmptyPassword() {
+    	try {
+    		customer = initCustomer();
+    		customer.setPassword("");
+    		assertEquals(false, register(customer));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    }
+	
+//	@Test
+    public void registerPasswordLessThan6Char() {
+    	try {
+    		customer = initCustomer();
+    		customer.setPassword("123");
+    		assertEquals(false, register(customer));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
     }
 	
 	@Test
-    public void register() {
+    public void registerEmptyGender() {
     	try {
-    		assertEquals(true, register(customer));
+    		customer = initCustomer();
+    		customer.setGender(0);
+    		assertEquals(false, register(customer));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
