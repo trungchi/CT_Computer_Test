@@ -43,7 +43,7 @@ public class TestRegister {
 		return customer;
 	}
 	
-//	@Test
+	@Test
     public void registerSuccess() {
     	try {
     		customer = initCustomer();
@@ -54,7 +54,7 @@ public class TestRegister {
 		}
     }
 	
-//	@Test
+	@Test
     public void registerDuplicateUser() {
     	try {
     		customer = initCustomer();
@@ -65,7 +65,7 @@ public class TestRegister {
 		}
     }
 	
-//	@Test
+	@Test
     public void registerEmptyFullName() {
     	try {
     		customer = initCustomer();
@@ -77,7 +77,7 @@ public class TestRegister {
 		}
     }
 	
-//	@Test
+	@Test
     public void registerEmptyPassword() {
     	try {
     		customer = initCustomer();
@@ -89,7 +89,7 @@ public class TestRegister {
 		}
     }
 	
-//	@Test
+	@Test
     public void registerPasswordLessThan6Char() {
     	try {
     		customer = initCustomer();
@@ -182,6 +182,6 @@ public class TestRegister {
 	
 	@After
     public void stopBrowser() {
-//    	SeleniumManager.stopDriver();
+    	SeleniumManager.stopDriver();
     }
 }
